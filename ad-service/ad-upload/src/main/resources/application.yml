@@ -1,0 +1,31 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: gateway
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+
+zuul:
+  prefix: /demo
+  routes:
+    sponsor:
+      path: /sponsor/**
+      serviceId: eureka-client-ad-sponsor
+      strip-prefix: false
+    upload:
+      path: /upload/**
+      serviceId: eureka-client-ad-upload
+      strip-prefix: false
+    search:
+      path: /search/**
+      serviceId: eureka-client-ad-search
+      strip-prefix: false
+    dashboard:
+      path: /dashboard/**
+      serviceId: eureka-client-ad-dashboard
+      strip-prefix: false
