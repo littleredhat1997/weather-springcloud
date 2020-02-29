@@ -4,27 +4,36 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Data
-public class PlanDto {
+public class UnitDto {
 
-    private Long userId = 2020L; // 所属用户 TODO
+    // 定向 TODO
 
-    @ApiModelProperty(value = "推广目标")
-    @NotNull(message = "推广目标不能为空")
-    private Integer target;
+    @ApiModelProperty(value = "所属计划", example = "0")
+    @NotNull(message = "所属计划不能为空")
+    private Long planId;
 
-    @ApiModelProperty(value = "日限额")
-    @NotNull(message = "日限额不能为空")
-    private Integer limit;
+    @ApiModelProperty(value = "广告版位", example = "0")
+    @NotNull(message = "广告版位不能为空")
+    private Integer position;
 
-    @ApiModelProperty(value = "投放模式")
-    @NotNull(message = "投放模式不能为空")
-    private Integer mode;
+    @ApiModelProperty(value = "开始时间")
+    @NotNull(message = "开始时间不能为空")
+    private Date startTime;
 
-    @ApiModelProperty(value = "计划名称")
-    @NotNull(message = "计划名称不能为空")
+    @ApiModelProperty(value = "结束时间")
+    @NotNull(message = "结束时间不能为空")
+    private Date endTime;
+
+    @ApiModelProperty(value = "出价")
+    @NotNull(message = "出价不能为空")
+    private Double price;
+
+    @ApiModelProperty(value = "单元名字")
+    @NotNull(message = "单元名字不能为空")
     private String name;
 
-    private Boolean status = false;
+    private Boolean enable = false;
 }

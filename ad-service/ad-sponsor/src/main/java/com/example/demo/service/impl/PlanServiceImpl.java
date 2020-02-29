@@ -1,14 +1,17 @@
-package com.example.demo.qiniu.impl;
+package com.example.demo.service.impl;
 
 import cn.hutool.core.convert.Convert;
 import com.example.demo.dao.PlanRepository;
+import com.example.demo.dto.PageDto;
 import com.example.demo.dto.PlanDto;
 import com.example.demo.entity.Plan;
-import com.example.demo.qiniu.PlanService;
+import com.example.demo.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.util.StringUtils;
 
 @Service
 public class PlanServiceImpl implements PlanService {
@@ -17,8 +20,19 @@ public class PlanServiceImpl implements PlanService {
     private PlanRepository planRepository;
 
     @Override
-    public List<Plan> getList(Long userId) {
-        return planRepository.findByUserId(userId);
+    public Plan get(Long planId) {
+        return planRepository.getOne(planId);
+    }
+
+    @Override
+    public Page<Plan> getList(PageDto request) {
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        if (!StringUtils.isEmpty(request.getKeyword())) {
+            String keyword = '%' + request.getKeyword() + '%';
+            return planRepository.findPageByName(keyword, pageable);
+        } else {
+            return planRepository.findAll(pageable);
+        }
     }
 
     @Override

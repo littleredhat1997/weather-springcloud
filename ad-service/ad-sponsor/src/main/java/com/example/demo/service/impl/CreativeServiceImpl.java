@@ -1,14 +1,17 @@
-package com.example.demo.qiniu.impl;
+package com.example.demo.service.impl;
 
 import cn.hutool.core.convert.Convert;
 import com.example.demo.dao.CreativeRepository;
 import com.example.demo.dto.CreativeDto;
+import com.example.demo.dto.PageDto;
 import com.example.demo.entity.Creative;
-import com.example.demo.qiniu.CreativeService;
+import com.example.demo.service.CreativeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.util.StringUtils;
 
 @Service
 public class CreativeServiceImpl implements CreativeService {
@@ -17,8 +20,19 @@ public class CreativeServiceImpl implements CreativeService {
     private CreativeRepository creativeRepository;
 
     @Override
-    public List<Creative> getList(Long unitId) {
-        return creativeRepository.findByUnitId(unitId);
+    public Creative get(Long creativeId) {
+        return creativeRepository.getOne(creativeId);
+    }
+
+    @Override
+    public Page<Creative> getList(PageDto request) {
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        if (!StringUtils.isEmpty(request.getKeyword())) {
+            String keyword = '%' + request.getKeyword() + '%';
+            return creativeRepository.findPageByName(keyword, pageable);
+        } else {
+            return creativeRepository.findAll(pageable);
+        }
     }
 
     @Override

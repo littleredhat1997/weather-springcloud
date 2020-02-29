@@ -1,17 +1,15 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-// 推广计划：推广目标、计划设置
+// 推广计划
 @Data
 @Entity
+@Table(name = "plan")
 public class Plan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,23 +18,17 @@ public class Plan implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
-    private Long userId; // 所属用户
+    @Column(name = "name", nullable = false)
+    private String name; // 计划名字
 
-    @Column(nullable = false)
-    private Integer target; // 推广目标 TargetEnum
+    @Column(name = "enable", nullable = false)
+    private Boolean enable = false;
 
-    @Column(nullable = false)
-    private Integer limit; // 日限额
+    @Column(name = "exposure", nullable = false)
+    private Long exposure = 0L;
 
-    @Column(nullable = false)
-    private Integer mode; // 投放模式 ModeEnum
-
-    @Column(nullable = false)
-    private String name; // 计划名称
-
-    @Column(nullable = false)
-    private Integer status;
+    @Column(name = "click", nullable = false)
+    private Long click = 0L;
 
     private Date createTime;
 

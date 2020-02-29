@@ -1,17 +1,15 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-// 推广单元：目标详情、定向、广告版位、排期和出价
+// 推广单元
 @Data
 @Entity
+@Table(name = "unit")
 public class Unit implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,31 +18,34 @@ public class Unit implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "plan_id", nullable = false)
     private Long planId; // 所属计划
-
-    @Column(nullable = false)
-    private String content; // 目标详情
 
     // 定向 TODO
 
-    @Column(nullable = false)
-    private Integer position; // 广告版位 PositionEnum
+    @Column(name = "position", nullable = false)
+    private Integer position; // 广告版位
 
-    @Column(nullable = false)
+    @Column(name = "start_time", nullable = false)
     private Date startTime; // 开始时间
 
-    @Column(nullable = false)
+    @Column(name = "end_time", nullable = false)
     private Date endTime; // 结束时间
 
-    @Column(nullable = false)
+    @Column(name = "price", nullable = false)
     private Double price; // 出价
 
-    @Column(nullable = false)
-    private String name; // 单元名称
+    @Column(name = "name", nullable = false)
+    private String name; // 单元名字
 
-    @Column(nullable = false)
-    private Integer status;
+    @Column(name = "enable", nullable = false)
+    private Boolean enable = false;
+
+    @Column(name = "exposure", nullable = false)
+    private Long exposure = 0L;
+
+    @Column(name = "click", nullable = false)
+    private Long click = 0L;
 
     private Date createTime;
 

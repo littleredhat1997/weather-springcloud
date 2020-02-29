@@ -39,7 +39,7 @@ public class PreRequestFilter extends ZuulFilter {
         String method = request.getMethod();
         String params = JSON.toJSONString(request.getParameterMap());
         log.info("***************************************************");
-        log.info("请求开始 | {}:{}({})", uri, method, params);
+        log.info("请求开始 | {}:{}:{}", uri, method, params);
         return null;
     }
 }

@@ -1,13 +1,15 @@
-package com.example.demo.qiniu;
+package com.example.demo.service;
 
 import com.example.demo.dto.CreativeDto;
+import com.example.demo.dto.PageDto;
 import com.example.demo.entity.Creative;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface CreativeService {
 
-    List<Creative> getList(Long unitId);
+    Creative get(Long creativeId);
+
+    Page<Creative> getList(PageDto request);
 
     void add(CreativeDto creativeDto);
 
