@@ -1,27 +1,11 @@
-# ad-springcloud
+# springcloud-demo
 
-随便的一个demo
+注册中心 http://localhost:8000/
 
-eureka: http://localhost:8000/
+路由网关 http://localhost:9000/
 
-gateway: http://localhost:9000/
+获取城市列表 http://localhost:9000/city/cities
 
-sponsor: http://localhost:9001/
+根据城市获取天气 http://localhost:9000/weather/?cityName=广州
 
-upload: http://localhost:9002/
-
-http://localhost:9000/swagger-ui.html
-
-```
-推广计划
-http://localhost:9000/sponsor/plan
-
-推广单元
-http://localhost:9000/sponsor/unit
-
-推广创意
-http://localhost:9000/sponsor/creative
-
-上传文件
-http://localhost:9000/upload/
-```
+SWAGGER http://localhost:9000/swagger-ui.html

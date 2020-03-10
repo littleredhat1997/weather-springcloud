@@ -16,9 +16,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>ad-eureka</module>
-        <module>ad-gateway</module>
-        <module>ad-service</module>
+        <module>eureka</module>
+        <module>gateway</module>
+        <module>service</module>
     </modules>
 
     <properties>
