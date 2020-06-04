@@ -11,15 +11,18 @@ eureka:
 spring:
   application:
     name: gateway
-
-zuul:
-  ignoredServices: '*'
-  routes:
-    city:
-      path: /city/**
-      service-id: city
-      strip-prefix: true
-    weather:
-      path: /weather/**
-      service-id: weather
-      strip-prefix: true
+  cloud:
+    gateway:
+      routes:
+        - id: city
+          uri: http://localhost:9001
+          predicates:
+            - Path=/city/**
+          filters:
+            - StripPrefix=1
+        - id: weather
+          uri: http://localhost:9002
+          predicates:
+            - Path=/weather/**
+          filters:
+            - StripPrefix=1
