@@ -1,9 +1,9 @@
 spring:
   application:
-    name: city
+    name: admin
 
 server:
-  port: 9001
+  port: 8888
 
 eureka:
   client:

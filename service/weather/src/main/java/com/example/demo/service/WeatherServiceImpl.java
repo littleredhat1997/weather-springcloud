@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.entity.Weather;
 import com.example.demo.entity.WeatherResponse;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +20,22 @@ public class WeatherServiceImpl implements WeatherService {
     private RestTemplate restTemplate;
 
     @Override
-    public WeatherResponse getDataByCityName(String cityName) {
+    @HystrixCommand(fallbackMethod = "getDefault") // 熔断器！！！
+    public Weather getDataByCityName(String cityName) {
         String url = WEATHER_URI + cityName;
-        return doGetWeather(url);
-    }
-
-    private WeatherResponse doGetWeather(String url) {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
         if (responseEntity.getStatusCodeValue() == 200) {
             String result = responseEntity.getBody();
-            return JSONObject.parseObject(result, WeatherResponse.class);
+            WeatherResponse weatherResponse = JSONObject.parseObject(result, WeatherResponse.class);
+            if (weatherResponse.getStatus() == 1000) {
+                return weatherResponse.getData();
+            }
         }
+        return null;
+    }
+
+    public Weather getDefault(String cityName) {
+        log.error("熔断器！！！" + cityName);
         return null;
     }
 }

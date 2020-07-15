@@ -19,6 +19,7 @@
         <module>eureka</module>
         <module>gateway</module>
         <module>service</module>
+        <module>admin</module>
     </modules>
 
     <properties>

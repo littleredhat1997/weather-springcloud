@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient("city")
-public interface CityClient {
+@FeignClient(value = "city", fallback = CityServiceHystrix.class)
+public interface CityService {
 
     @RequestMapping(value = "/cities", method = RequestMethod.GET)
     List<City> listCity() throws Exception;

@@ -14,7 +14,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- 通用模块 -->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>common</artifactId>

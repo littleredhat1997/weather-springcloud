@@ -1,3 +1,7 @@
+spring:
+  application:
+    name: weather
+
 server:
   port: 9002
 
@@ -6,6 +10,15 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8000/eureka/
 
-spring:
-  application:
-    name: weather
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+feign:
+  hystrix:
+    enabled: true
