@@ -5,13 +5,13 @@ spring:
     gateway:
       routes:
         - id: city
-          uri: http://localhost:9001
+          uri: lb://city
           predicates:
             - Path=/city/**
           filters:
             - StripPrefix=1
         - id: weather
-          uri: http://localhost:9002
+          uri: lb://weather
           predicates:
             - Path=/weather/**
           filters:
@@ -21,8 +21,6 @@ server:
   port: 9000
 
 eureka:
-  #instance:
-  #  prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://localhost:8000/eureka/
