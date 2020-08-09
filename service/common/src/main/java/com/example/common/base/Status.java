@@ -23,7 +23,12 @@ public enum Status {
     ACCOUNT_DISABLED(1009, "认证失败：用户不可用"),
     ACCOUNT_EXPIRED(1006, "认证失败：用户过期"),
     ACCOUNT_LOCKED(1007, "认证失败：用户锁定"),
-    CREDENTIALS_EXPIRED(1008, "认证失败：证书过期");
+    CREDENTIALS_EXPIRED(1008, "认证失败：证书过期"),
+
+    ORDER_FAILURE(10000, "创建订单失败"),
+    ACCOUNT_FAILURE(10001, "扣减余额失败"),
+    STORAGE_FAILURE(10002, "扣减库存失败"),
+    ;
 
     private Integer code;
     private String msg;
